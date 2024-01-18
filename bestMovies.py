@@ -1,6 +1,5 @@
-# movie_analysis.py
-
 import pandas as pd
+import matplotlib.pyplot as plt
 
 def best_movies(file_path='tmdb-movies.csv'):
     # Read the CSV file into a DataFrame
@@ -38,3 +37,22 @@ def best_movies(file_path='tmdb-movies.csv'):
     highest_revenue = revenue_by_year.max()
 
     print(f"\nThe best year by revenue is {best_year} with a total revenue of {highest_revenue:.2f}")
+
+    # Create a horizontal bar chart for the top 10 movies with custom colors (reversed order)
+    plt.figure(figsize=(12, 6))
+    plt.subplot(1, 2, 1)
+    plt.barh(top_10_movies['original_title'], top_10_movies['revenue'], color=['#FF5733', '#FF8C00', '#FFD700', '#9ACD32', '#32CD32', '#00CED1', '#1E90FF', '#8A2BE2', '#FF69B4', '#FF1493'][::-1])
+    plt.xlabel('Revenue (in billions)')
+    plt.title('Top 10 Movies by Revenue (Reversed Order)')
+
+    # Create a horizontal bar chart for the lowest 10 movies with custom colors and reversed order
+    plt.subplot(1, 2, 2)
+    plt.barh(lowest_10_movies['original_title'], lowest_10_movies['revenue'], color=['#FF5733', '#FF8C00', '#FFD700', '#9ACD32', '#32CD32', '#00CED1', '#1E90FF', '#8A2BE2', '#FF69B4', '#FF1493'][::-1])
+    plt.xlabel('Revenue (in billions)')
+    plt.title('Lowest 10 Movies by Revenue')
+
+    plt.tight_layout()
+    plt.show()
+
+# Call the function
+best_movies()

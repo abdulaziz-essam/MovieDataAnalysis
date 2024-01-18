@@ -1,6 +1,7 @@
 # movie_analysis.py
-# // get first ten dorectors by movies revenue
+# // get first ten directors by movies revenue
 import pandas as pd
+import matplotlib.pyplot as plt
 
 def best_director(file_path='tmdb-movies.csv'):
     # Read the CSV file into a DataFrame
@@ -39,6 +40,16 @@ def best_director(file_path='tmdb-movies.csv'):
         print(director)
 
     print("\nTotal number of unique directors:", len(unique_directors))
+
+    # Create a bar chart for the top directors and their revenue
+    plt.figure(figsize=(10, 6))
+    plt.bar(top_director['director'], top_director['revenue'], color='blue')
+    plt.title('Top Directors by Revenue')
+    plt.xlabel('Director')
+    plt.ylabel('Revenue (in billions)')
+    plt.xticks(rotation=45, ha='right')
+    plt.tight_layout()
+    plt.show()
 
 # Call the function
 best_director()
